@@ -1,0 +1,55 @@
+<div>
+	<table class="table">
+		<tbody>
+				<tr>
+					<td>姓名：</td>
+					<td><%-rs.realname%></td>
+				</tr>
+				<tr>
+					<td>性别：</td>
+					<td><%-rs.sex%></td>
+				</tr>
+				<tr>
+					<td>telphone:</td>
+					<td><%-rs.telphone%></td>
+				</tr>
+				<tr>
+					<td>idcardnum:</td>
+					<td><%-rs.idcardnum%></td>
+				</tr>
+				<tr>
+					<td>idcardface:</td>
+					<td><img src="<%-rs.idcardface%>" style="width:300px;height:200px"></td>
+				</tr>
+				<tr>
+					<td>idcardbakc:</td>
+					<td><img src="<%-rs.idcardbakc%>" style="width:300px;height:200px"></td>
+				</tr>
+				<tr>
+					<td>idcardme:</td>
+					<td><img src="<%-rs.idcardme%>" style="width:300px;height:200px"></td>
+				</tr>
+				<tr>
+					<td>操作：</td>
+					<td>
+						<button class="btn btn-success" onclick="reviewPass('<%-rs._id%>')">同意</button>&nbsp;
+						<button class="btn" onclick="reviewRefuse('<%-rs._id%>')">驳回</button>
+					</td>
+				</tr>
+		</tbody>
+	</table>
+</div>
+<script type="text/javascript">
+	function reviewPass(id){
+		$.get('./reviewPass?id='+id,function(rhtml){
+			if(rhtml == 0){
+				location.href = './identity';
+			}else{
+				alert('系统繁忙，请稍候再试');
+			}
+		})
+	}
+	function reviewRefuse(id){
+		$('#modal-body').load('./reviewRefuse?id='+id);
+	}
+</script>

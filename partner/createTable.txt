@@ -1,0 +1,3 @@
+
+db.createCollection('users');
+db.adminusers.insert({"email":"admin","pwd":"admin",'nicheng':"管理员"})

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>管理员页面</title>
+	<link href="/stylesheets/bootstrap.css" rel="stylesheet">
+	<script src="/javascripts/jquery-3.2.1.js"></script>
+	<script src="/javascripts/bootstrap.js"></script>
+</head>
+<body>
+	<div class="row">
+	  <div class="col-md-1"></div>
+	  <div class="col-md-10" style="background:url('/images/authenticate/daohanglanbj.jpg');background-size:100%;height:50px;text-align:center;line-height:50px;font-size:20px;color:white;font-family:'宋体'">
+		  	欢迎来到管理员页面
+		</div>
+	  <div class="col-md-1"></div>
+	</div>
+	<div class="row" style="">
+	  <div class="col-md-2"></div>
+	  <div class="col-md-8" style="background:url('/images/authenticate/upload_020e367ba8271c86ba98964d69c2c3f6.jpg');background-size:100%;overflow-x:hidden;overflow-y:auto;height:520px">
+		  	<table class="table table-hover">
+				<tr>
+					<td>真实姓名</td>
+					<td>性别</td>
+					<td>手机号码</td>
+					<td>身份证号</td>
+					<td>操作</td>
+				</tr>
+				<% rs.forEach(function(item){ %>
+				<tr >
+					<td><%-item.realname%></td>
+					<td><%-item.sex%></td>
+					<td><%-item.telphone%></td>
+					<td><%-item.idcardnum%></td>
+					<td><button class="btn btn-default" onclick="Look('<%-item.id%>')">查看</button></td>
+				</tr>
+				<% }) %>
+				<tr>
+					<td colspan="5" align="center">
+						共<%-count%>条,第<%-page%>/<%-pagesum%>页
+						<%if(page>1){%>
+							<a href="./identity?page=1">首页</a>&nbsp;
+							<a href="./identity?page=<%-(page-1)%>">上一页</a>&nbsp;
+						<%}%>
+						<%if(page<pagesum){%>
+							<a href="./identity?page=<%-(page+1)%>">下一页</a>&nbsp;
+							<a href="./identity?page=<%-pagesum%>">尾页</a>
+						<%}%>
+					</td>
+				</tr>
+			</table>
+		</div>
+	  <div class="col-md-2"></div>
+	</div>
+	<div class="row">
+	  <div class="col-md-1"></div>
+	  <div class="col-md-10" style="background:url('/images/authenticate/daohanglanbj.jpg');background-size:100%;height:50px;text-align:center;line-height:50px;font-size:20px;color:white;font-family:'宋体'">
+		  	欢迎来到管理员页面
+		</div>
+	  <div class="col-md-1"></div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+				    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				    <h4 class="modal-title" id="myModalLabel">认证信息</h4>
+				</div>
+				<div id='modal-body' class="modal-body"></div>
+				<div class="modal-footer">
+				    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal -->
+	</div>
+		
+</body>
+<script type="text/javascript">
+	function Look(id){
+		$.get('./identityInfo?id='+id,function(rehtml){
+			$('#modal-body').html(rehtml);
+		})
+		$('#myModal').modal('show');
+	}
+</script>
+</html>
